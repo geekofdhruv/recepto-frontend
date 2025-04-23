@@ -1,0 +1,57 @@
+import { Lead } from '../types/lead';
+
+export const leads: Lead[] = [
+  {
+    id: 1,
+    name: 'Jennifer Markus',
+    location: 'Mumbai, India',
+    isLocked: true,
+    unlockCredits: 2,
+    message: '"Looking for recommendations on product analytics tools for our B2B SaaS platform. Currently evaluating options for a team of 50 ...read more',
+    score: 92,
+    type: 'receptoNet',
+    updatedTime: '2h ago',
+    avatarColor: '#4F46E5',
+  },
+  {
+    id: 2,
+    name: 'Dhruv Saxena',
+    location: 'California, United States of America',
+    isLocked: true,
+    unlockCredits: 3,
+    message: 'Need sales automation for B2B',
+    score: 78,
+    type: 'organization',
+    groupName: 'SaaS Leads',
+    company: 'TechWave',
+    people: [],
+    avatarColor: '#10B981',
+  },
+  {
+    id: 1,
+    name: 'Jennifer Markus',
+    location: 'Mumbai, India',
+    isLocked: true,
+    unlockCredits: 2,
+    message: '"Looking for recommendations on product analytics tools for our B2B SaaS platform. Currently evaluating options for a team of 50 ...read more',
+    score: 92,
+    type: 'receptoNet',
+    updatedTime: '2h ago',
+    avatarColor: '#4F46E5',
+  },
+  {
+    id: 2,
+    name: 'Dhruv Saxena',
+    location: 'London, United Kingdom',
+    isLocked: true,
+    unlockCredits: 3,
+    message: 'Need sales automation for B2B',
+    score: 78,
+    type: 'organization',
+    groupName: 'SaaS Leads',
+    company: 'TechWave',
+    people: [],
+    avatarColor: '#10B981',
+  }
+  
+];
