@@ -28,7 +28,7 @@ export const leads: Lead[] = [
     avatarColor: '#10B981',
   },
   {
-    id: 1,
+    id: 3,
     name: 'Jennifer Markus',
     location: 'Mumbai, India',
     isLocked: true,
@@ -40,7 +40,7 @@ export const leads: Lead[] = [
     avatarColor: '#4F46E5',
   },
   {
-    id: 2,
+    id: 4,
     name: 'Dhruv Saxena',
     location: 'London, United Kingdom',
     isLocked: true,

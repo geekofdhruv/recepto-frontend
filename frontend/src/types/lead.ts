@@ -6,7 +6,7 @@ export interface Lead {
     unlockCredits?: number;
     message: string;
     timeStatus?: string;
-    type?: string;
+    type: string;
     score: number;
     company?: string;
     companyTier?: number;

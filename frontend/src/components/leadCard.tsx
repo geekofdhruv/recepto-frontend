@@ -1,25 +1,40 @@
 import { useState } from "react";
 import { Lead } from "../types/lead";
+import { teamMembers } from "../data/team";
 import { useCredits } from "../context/credits";
 import { AssignDropdown } from "./assignDropdown";
+import { useAnalytics } from "../context/leadAnalyticsContext";
+import { useLeads } from "../context/unlockLead";
 
 export const LeadCard = ({ lead }: { lead: Lead }) => {
   const { credits, deductCredits } = useCredits();
+  const { unlockLead: analyticsUnlock, assignLead: analyticsAssign } = useAnalytics();
+  const { unlockedLeads, assignedLeads, unlockLead, assignLead } = useLeads(); // 👈 global lead state
 
   const [showAssign, setShowAssign] = useState(false);
-  const [assignedTo, setAssignedTo] = useState<string | null>(null);
-  
+
+  const isUnlocked = unlockedLeads.has(lead.id);
+  const assignedTo = assignedLeads[lead.id] || null;
 
   const handleUnlock = () => {
     if (lead.unlockCredits && credits >= lead.unlockCredits) {
       deductCredits(lead.unlockCredits);
-      lead.isLocked = false;
+      unlockLead(lead.id);
+      analyticsUnlock(lead.type);
+      console.log(lead.type);
+      
     } else {
       alert("Not enough credits!");
     }
   };
 
-  const people = ["Olivia Rhye", "James Doe", "Emily Zhang", "Arjun Mehta", "Ayesha Khan"];
+  const handleAssign = (name: string) => {
+    setShowAssign(false);
+    assignLead(lead.id, name); // update global
+    const teamMember = teamMembers.find((member) => member.name === name);
+    const teamMemberId = teamMember?.id || 1;
+    analyticsAssign(lead.type, teamMemberId);
+  };
 
   return (
     <div className="rounded-lg p-5 my-4 shadow-md bg-white hover:shadow-lg transition-shadow">
@@ -27,8 +42,11 @@ export const LeadCard = ({ lead }: { lead: Lead }) => {
         <div className="flex justify-between">
           <div className="font-medium text-md">{lead.name}</div>
           <div className="flex items-end gap-4">
-            {lead.isLocked ? (
-              <button className="bg-blue-500 text-white px-10 py-1 rounded-2xl flex" onClick={handleUnlock}>
+            {!isUnlocked ? (
+              <button
+                className="bg-blue-500 text-white px-10 py-1 rounded-2xl flex"
+                onClick={handleUnlock}
+              >
                 Unlock <span className="ml-1">{lead.unlockCredits || 0}</span>
               </button>
             ) : (
@@ -47,16 +65,15 @@ export const LeadCard = ({ lead }: { lead: Lead }) => {
                     </button>
                     {showAssign && (
                       <AssignDropdown
-                        people={people}
-                        onAssign={(name) => {
-                          setAssignedTo(name);
-                          setShowAssign(false);
-                        }}
+                        people={teamMembers.map((member) => member.name)}
+                        onAssign={handleAssign}
                       />
                     )}
                   </>
                 )}
-                <button className="border border-gray-400 text-gray-600 px-4 py-1 rounded-full">View Details</button>
+                <button className="border border-gray-400 text-gray-600 px-4 py-1 rounded-full">
+                  View Details
+                </button>
               </div>
             )}
             <div
