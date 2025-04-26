@@ -10,7 +10,7 @@ interface MetricCardProps {
 const MetricCard: React.FC<MetricCardProps> = ({ icon, title, value }) => {
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm">
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center gap-4">
         <div className="text-blue-600 mb-2">
           {icon}
         </div>

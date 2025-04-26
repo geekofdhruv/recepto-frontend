@@ -33,7 +33,7 @@ function Header() {
 
         <button className="px-3 mt-4 py-2 bg-white rounded-sm shadow-md outline-gray-300 flex items-center gap-2 border border-gray-300 hover:shadow-lg transition ml-240" onClick={() => setShowFilters((prev) => !prev)}>
           <span className="text-slate-700 text-sm font-semibold">Filters</span>
-          <span className="px-1.5 py-0.5 bg-blue-600/10 rounded-2xl text-blue-600 text-xs font-semibold">2</span>
+          
         </button>
         <FilterPanel open={showFilters} onClose={() => setShowFilters(false)} />
         

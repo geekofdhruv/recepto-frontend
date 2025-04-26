@@ -5,6 +5,7 @@ import Header from '../components/header'
 import { LeadList } from '../components/leadList'
 
 
+
 function Leads() {
   return (
     <div className="flex h-screen bg-gray-50">

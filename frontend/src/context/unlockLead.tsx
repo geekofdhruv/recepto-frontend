@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 
-// Context Type
+
 type LeadContextType = {
   unlockedLeads: Set<number>;
-  assignedLeads: Record<number, string>; // leadId → member name
+  assignedLeads: Record<number, string>; 
   unlockLead: (leadId: number) => void;
   assignLead: (leadId: number, name: string) => void;
 };
@@ -16,7 +16,7 @@ export const LeadProvider = ({ children }: { children: React.ReactNode }) => {
   const [assignedLeads, setAssignedLeads] = useState<Record<number, string>>({});
 
   useEffect(() => {
-    // Optional: Persist unlocks in localStorage
+  
     const saved = localStorage.getItem("unlockedLeads");
     if (saved) {
       setUnlockedLeads(new Set(JSON.parse(saved)));

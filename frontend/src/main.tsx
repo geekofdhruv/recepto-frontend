@@ -6,13 +6,16 @@ import { LeadProvider } from './context/unlockLead.tsx'
 
 
 import App from './App.tsx'
+import { FilterProvider } from './context/filterContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <CreditsProvider>
       <AnalyticsProvider>
         <LeadProvider>
+          <FilterProvider>
       <App />
+          </FilterProvider>
       </LeadProvider>
       </AnalyticsProvider>
     </CreditsProvider>

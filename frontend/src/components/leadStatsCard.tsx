@@ -1,9 +1,8 @@
-// components/analytics/LeadStatsCard.tsx
 import React from 'react';
 import { useAnalytics } from '../context/leadAnalyticsContext';
 
 interface LeadStatsCardProps {
-  type: 'receptoNet' | 'orgNetwork'; // Type to differentiate between lead types
+  type: 'receptoNet' | 'orgNetwork';
   icon: React.ReactNode;
   title: string;
   color: string;
@@ -21,11 +20,11 @@ const LeadStatsCard: React.FC<LeadStatsCardProps> = ({
  
   
 
-  // Determine which lead stats to use based on the type
+
   const leadStats = type === 'receptoNet' ? receptoLeads : orgLeads;
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-sm mb-4">
+    <div className="w-1/2 bg-white rounded-lg p-6 shadow-sm mb-4">
       <div className="flex justify-between">
         <div>
           <div className="flex items-center gap-2 mb-2">

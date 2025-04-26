@@ -1,33 +1,32 @@
-// components/analytics/LeadChart.tsx
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
+import { useAnalytics } from '../context/leadAnalyticsContext';
 
 interface LeadChartProps {
   data: number[];
   color: string;
   maxValue?: number;
+  type: 'receptoNet' | 'orgNetwork';
 }
 
-const LeadChart: React.FC<LeadChartProps> = ({ data, color, maxValue = 400 }) => {
+const LeadChart: React.FC<LeadChartProps> = ({ data, color, maxValue = 400,type }) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstance = useRef<Chart | null>(null);
+  const { receptoLeads, orgLeads } = useAnalytics();
+  const yetToUnlock = type === 'receptoNet' ? receptoLeads.yetToUnlock : orgLeads.yetToUnlock;
 
   useEffect(() => {
     if (chartRef.current) {
       const ctx = chartRef.current.getContext('2d');
       
       if (ctx) {
-        // Destroy previous chart if it exists
         if (chartInstance.current) {
           chartInstance.current.destroy();
         }
-        
-        // Create gradient
         const gradient = ctx.createLinearGradient(0, 0, 0, 200);
-        gradient.addColorStop(0, `${color}40`); // Semi-transparent
-        gradient.addColorStop(1, `${color}05`); // Almost transparent
+        gradient.addColorStop(0, `${color}40`); 
+        gradient.addColorStop(1, `${color}05`); 
         
-        // Create chart
         chartInstance.current = new Chart(ctx, {
           type: 'line',
           data: {
@@ -85,6 +84,7 @@ const LeadChart: React.FC<LeadChartProps> = ({ data, color, maxValue = 400 }) =>
         });
       }
     }
+   
     
     return () => {
       if (chartInstance.current) {
@@ -97,7 +97,7 @@ const LeadChart: React.FC<LeadChartProps> = ({ data, color, maxValue = 400 }) =>
     <div className="h-40 relative">
       <canvas ref={chartRef}></canvas>
       <div className="absolute top-0 right-0 bg-white px-2 py-1 rounded-full text-xs font-medium">
-        394
+        {yetToUnlock}
       </div>
     </div>
   );

@@ -8,13 +8,15 @@ import { useLeads } from "../context/unlockLead";
 
 export const LeadCard = ({ lead }: { lead: Lead }) => {
   const { credits, deductCredits } = useCredits();
-  const { unlockLead: analyticsUnlock, assignLead: analyticsAssign } = useAnalytics();
-  const { unlockedLeads, assignedLeads, unlockLead, assignLead } = useLeads(); // 👈 global lead state
+  const { unlockLead: analyticsUnlock, assignLead: analyticsAssign, likeLead } = useAnalytics();
+  const { unlockedLeads, assignedLeads, unlockLead, assignLead } = useLeads(); 
 
   const [showAssign, setShowAssign] = useState(false);
 
   const isUnlocked = unlockedLeads.has(lead.id);
   const assignedTo = assignedLeads[lead.id] || null;
+
+  
 
   const handleUnlock = () => {
     if (lead.unlockCredits && credits >= lead.unlockCredits) {
@@ -30,7 +32,7 @@ export const LeadCard = ({ lead }: { lead: Lead }) => {
 
   const handleAssign = (name: string) => {
     setShowAssign(false);
-    assignLead(lead.id, name); // update global
+    assignLead(lead.id, name);
     const teamMember = teamMembers.find((member) => member.name === name);
     const teamMemberId = teamMember?.id || 1;
     analyticsAssign(lead.type, teamMemberId);
@@ -84,8 +86,12 @@ export const LeadCard = ({ lead }: { lead: Lead }) => {
               {lead.score}
             </div>
             <div className="flex gap-2 mt-1">
-              <button>👍</button>
-              <button>👎</button>
+            <button>
+                <img src='./like.png' alt="Like" className="w-8 h-8" onClick={() => likeLead(lead.type)}/>
+              </button>
+              <button>
+                <img src='./Dislike (1).png' alt="Like" className="w-8 h-8" />
+              </button>
             </div>
           </div>
         </div>

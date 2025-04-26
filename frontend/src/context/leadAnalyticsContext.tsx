@@ -22,7 +22,7 @@ interface AnalyticsContextType {
 const AnalyticsContext = createContext<AnalyticsContextType | undefined>(undefined);
 
 export const AnalyticsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Initial state for ReceptoNet leads
+
   const [receptoLeads, setReceptoLeads] = useState<LeadStats>({
     total: 404,
     unlocked: 179,
@@ -31,7 +31,6 @@ export const AnalyticsProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     assigned: 20,
   });
 
-  // Initial state for Org Network leads
   const [orgLeads, setOrgLeads] = useState<LeadStats>({
     total: 594,
     unlocked: 179,
@@ -40,10 +39,10 @@ export const AnalyticsProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     assigned: 20,
   });
 
-  // Team members state
+ 
   const [team, setTeam] = useState<TeamMember[]>(teamMembers);
 
-  // Function to unlock a lead
+
   const unlockLead = (type: string) => {
     if (type === 'receptoNet') {
       setReceptoLeads((prev) => ({
@@ -60,9 +59,9 @@ export const AnalyticsProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     }
   };
 
-  // Function to assign a lead to a team member
+  
   const assignLead = (type: string, teamMemberId: number) => {
-    // Update the lead stats
+   
     if (type === 'receptoNet') {
       setReceptoLeads((prev) => ({
         ...prev,
@@ -75,7 +74,6 @@ export const AnalyticsProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       }));
     }
 
-    // Update the team member's assigned count
     setTeam((prev) =>
       prev.map((member) =>
         member.id === teamMemberId
@@ -85,7 +83,7 @@ export const AnalyticsProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     );
   };
 
-  // Function to like a lead
+
   const likeLead = (type: string) => {
     if (type === 'receptoNet') {
       setReceptoLeads((prev) => ({
@@ -98,9 +96,10 @@ export const AnalyticsProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         liked: prev.liked + 1,
       }));
     }
+    
   };
 
-  // Debugging: Log state changes to verify updates
+
   useEffect(() => {
     console.log('Recepto Leads Updated:', receptoLeads);
   }, [receptoLeads]);

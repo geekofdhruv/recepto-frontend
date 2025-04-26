@@ -1,4 +1,3 @@
-// components/analytics/TeamTable.tsx
 import React from 'react';
 import { useAnalytics } from '../context/leadAnalyticsContext';
 
@@ -9,18 +8,10 @@ const TeamTable: React.FC = () => {
     <div className="bg-white rounded-lg shadow-sm p-4">
       <div className="grid grid-cols-5 gap-4 p-4 border-b">
         <div>Team</div>
-        <div className="flex items-center">
-          Role <span className="ml-1 text-gray-400 cursor-pointer">ⓘ</span>
-        </div>
-        <div className="flex items-center">
-          Generated <span className="ml-1 text-gray-400 cursor-pointer">ⓘ</span>
-        </div>
-        <div className="flex items-center">
-          Unlocked <span className="ml-1 text-gray-400 cursor-pointer">ⓘ</span>
-        </div>
-        <div className="flex items-center">
-          Assigned <span className="ml-1 text-gray-400 cursor-pointer">ⓘ</span>
-        </div>
+        <div className="flex items-center">Role</div>
+        <div className="flex items-center">Generated</div>
+        <div className="flex items-center">Unlocked</div>
+        <div className="flex items-center">Assigned</div>
       </div>
       
       {team.map((member) => (
@@ -51,24 +42,6 @@ const TeamTable: React.FC = () => {
           </div>
         </div>
       ))}
-      
-      <div className="flex justify-between p-4">
-        <button className="flex items-center px-4 py-2 border rounded">
-          <span className="mr-2">←</span> Previous
-        </button>
-        
-        <div className="flex items-center">
-          <button className="px-3 py-1 border rounded bg-gray-100">1</button>
-          <button className="px-3 py-1 border rounded mx-1">2</button>
-          <span>...</span>
-          <button className="px-3 py-1 border rounded mx-1">6</button>
-          <button className="px-3 py-1 border rounded">7</button>
-        </div>
-        
-        <button className="flex items-center px-4 py-2 border rounded">
-          Next <span className="ml-2">→</span>
-        </button>
-      </div>
     </div>
   );
 };
